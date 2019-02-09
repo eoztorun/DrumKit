@@ -5,12 +5,24 @@ var drumButtons = document.querySelectorAll(".drum");
 for (var i = 0; i < drumButtons.length; i++) {
   drumButtons[i].addEventListener("click", handleClick)
 }
+//add keydown event listener to the entire document
+document.addEventListener("keydown", handleKeyDown);
 
 //function to handle what happens on click event
 function handleClick() {
   var buttonInnerHTML = this.textContent;
+  playSound(buttonInnerHTML);
+}
 
-  switch (buttonInnerHTML) {
+//function to handle what happens when keyboard key is pressed
+function handleKeyDown(event) {
+  var key = event.key;
+  playSound(key);
+}
+
+//play the relevant sound with keyboard or click input
+function playSound(userInput) {
+  switch (userInput) {
     case "w":
         var crash = new Audio("sounds/crash.mp3");
         crash.play();
@@ -47,6 +59,6 @@ function handleClick() {
       break;
 
     default:
-        console.log(buttonInnerHTML);
+        console.log(userInput);
   }
 }
