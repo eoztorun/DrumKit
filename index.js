@@ -12,12 +12,14 @@ document.addEventListener("keydown", handleKeyDown);
 function handleClick() {
   var buttonInnerHTML = this.textContent;
   playSound(buttonInnerHTML);
+  buttonAnimation(buttonInnerHTML);
 }
 
 //function to handle what happens when keyboard key is pressed
 function handleKeyDown(event) {
   var key = event.key;
   playSound(key);
+  buttonAnimation(key);
 }
 
 //play the relevant sound with keyboard or click input
@@ -61,4 +63,16 @@ function playSound(userInput) {
     default:
         console.log(userInput);
   }
+}
+
+function buttonAnimation(currentKey) {
+  var activeButton = document.querySelector("." + currentKey);
+  activeButton.classList.add("pressed");
+  console.log("key " + currentKey);
+
+  //delay 0.1s to remove the pressed class style from the button
+  setTimeout(function() {
+    activeButton.classList.remove("pressed");
+    console.log("keyreleased");
+  }, 100);
 }
